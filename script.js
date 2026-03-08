@@ -23,6 +23,7 @@ async function searchMovies(query) {
     results.innerHTML = "";
     data.Search.forEach(movie => {
       const div = document.createElement("div");
+      div.classList.add('movie-card');
       div.innerHTML = `
         <h3>${movie.Title} (${movie.Year})</h3>
         <img src="${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/150"} alt="Poster">
