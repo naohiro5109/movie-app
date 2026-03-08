@@ -6,6 +6,8 @@ const API_KEY = "5048fcc6";
 
 async function searchMovies(query) {
   try {
+    results.innerHTML = `<div class="loader"></div>`;
+
     const response = await fetch(
       `https://www.omdbapi.com/?apikey=${API_KEY}&s=${encodeURIComponent(query)}`
     );
