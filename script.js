@@ -35,13 +35,20 @@ async function searchMovies(query) {
   }
 }
 
-searchBtn.addEventListener('click', () => {
+function handleSearch() {
   const query = movieInput.value.trim();
-
   if ( query === "" ) {
     alert('映画タイトルを入力してください');
     return;
   }
 
   searchMovies(query);
+}
+
+searchBtn.addEventListener('click', handleSearch);
+
+movieInput.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    handleSearch();
+  }
 });
