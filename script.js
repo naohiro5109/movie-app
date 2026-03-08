@@ -36,7 +36,21 @@ async function searchMovies(query) {
     favButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         const movieId = btn.dataset.id;
-        console.log("お気に入り追加:", movieId);
+        const movieTitle = btn.closest('.movie-card').querySelector('h3').innerText;
+        const moviePoster = btn.closest('.movie-card').querySelector('img').src;
+
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (favorites.some((m) => m.id === movieId)) {
+          alert("この映画はすでにお気に入りに登録されています");
+          return;
+        }
+
+        favorites.push({ id: movieId, title: movieTitle, poster: moviePoster });
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+
+        alert(`"${movieTitle}"をお気に入りに追加しました`);
       });
     });
   } catch (error) {
