@@ -1,6 +1,7 @@
 const searchBtn = document.getElementById('searchBtn');
 const movieInput = document.getElementById('movieInput');
 const results = document.getElementById('results');
+const favoritesList = document.getElementById('favoritesList');
 
 const API_KEY = "5048fcc6";
 
@@ -26,7 +27,7 @@ async function searchMovies(query) {
       div.classList.add('movie-card');
       div.innerHTML = `
         <h3>${movie.Title} (${movie.Year})</h3>
-        <img src="${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/150"} alt="Poster">
+        <img src="${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/150"}" alt="Poster">
         <button class="favorite-btn" data-id="${movie.imdbID}">☆ お気に入りに追加</button>
       `;
       results.appendChild(div);
@@ -46,7 +47,11 @@ async function searchMovies(query) {
           return;
         }
 
-        favorites.push({ id: movieId, title: movieTitle, poster: moviePoster });
+        favorites.push({
+          id: movieId,
+          title: movieTitle,
+          poster: moviePoster
+        });
 
         localStorage.setItem('favorites', JSON.stringify(favorites));
 
@@ -75,4 +80,22 @@ movieInput.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     handleSearch();
   }
+});
+
+const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+favoritesList.innerHTML = "";
+
+favorites.forEach((movie) => {
+  const div = document.createElement('div');
+  div.classList.add('movie-card');
+
+  div.innerHTML = `
+    <h3>${movie.title}</h3>
+    <img src="${
+      movie.poster !== "N/A" ? movie.poster : "https://via.placeholder.com/150"
+    }" alt="Poster">
+  `;
+
+  favoritesList.appendChild(div);
 });
