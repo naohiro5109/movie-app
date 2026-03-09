@@ -55,7 +55,13 @@ async function searchMovies(query) {
 
         localStorage.setItem('favorites', JSON.stringify(favorites));
 
-        alert(`"${movieTitle}"をお気に入りに追加しました`);
+        const msg = document.createElement('p');
+        msg.innerText = `"${movieTitle}"をお気に入りに追加しました`;
+        msg.classList.add('save-msg');
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 2000);
+
+        renderFavorites();
       });
     });
   } catch (error) {
@@ -104,6 +110,13 @@ function renderFavorites() {
     div.querySelector('.delete-btn').addEventListener('click', () => {
       const updatedFavorites = favorites.filter((m) => m.id !== movie.id);
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+
+      const msg = document.createElement('p');
+      msg.innerText = `"${movie.title}"をお気に入りから削除しました`;
+      msg.classList.add('delete-msg');
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 2000);
+
       renderFavorites();
     });
   });

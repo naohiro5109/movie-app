@@ -41,3 +41,38 @@ button {
   0% { transform : rotate (0deg); }
   0% { transform : rotate (360deg); }
 }
+.save-msg,
+.delete-msg {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgb(0, 0, 0, 0.3);
+  animation: fadeInOut 2s ease forwards;
+  z-index: 9999;
+}
+.save-msg {
+  background: #4caf50;
+}
+.delete-msg {
+  background: #f44336;
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform : translateY(20px);
+  }
+  10% {
+    opacity: 1;
+    transform : translateY(0);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform : translateY(20px);
+  }
+}
