@@ -7,11 +7,19 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
 }
+h2 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  border-left: 5px solid #007bff;
+  padding-left: 10px;
+  color: #333;
+}
 .search-box {
   text-align: center;
   margin-bottom: 30px;
 }
-input [type="text"] {
+input[type="text"] {
   padding: 10px;
   width: 250px;
   border: 1px solid #ccc;
@@ -22,11 +30,11 @@ button {
   border: none;
   border-radius: 5px;
   background-color: #0056b3;
+  color: #fff;
+  cursor: pointer;
 }
-#results {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+button:hover {
+  background-color: #004494;
 }
 .loader {
   border: 6px solid #f3f3f3;
@@ -38,8 +46,92 @@ button {
   margin: 20px auto;
 }
 @keyframes spin {
-  0% { transform : rotate (0deg); }
-  0% { transform : rotate (360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+#results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 15px;
+}
+.movie-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.movie-card:hover {
+  transform: scale(1.05);
+}
+.movie-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+.movie-card h3 {
+  font-size: 18px;
+  margin: 10px 0 5px;
+}
+.movie-card p {
+  font-size: 14px;
+  color: #555;
+}
+#favoritesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 250px));
+  gap: 15px;
+  justify-content: start;
+}
+.favorite-card {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s,box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.favorite-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.favorite-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+.favorite-card h3 {
+  font-size: 18px;
+  margin: 10px 0 5px;
+}
+.favorite-card p {
+  font-size: 14px;
+  color: #555;
+}
+.delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(244,67,54,0.9);
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.favorite-card:hover .delete-btn {
+  opacity: 1;
+}
+.delete-btn:hover {
+  background: #d32f2f;
 }
 .save-msg,
 .delete-msg {
@@ -49,7 +141,7 @@ button {
   color: #fff;
   padding: 10px 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgb(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   animation: fadeInOut 2s ease forwards;
   z-index: 9999;
 }
@@ -60,19 +152,8 @@ button {
   background: #f44336;
 }
 @keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform : translateY(20px);
-  }
-  10% {
-    opacity: 1;
-    transform : translateY(0);
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform : translateY(20px);
-  }
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(20px); }
 }
