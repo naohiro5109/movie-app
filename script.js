@@ -82,20 +82,31 @@ movieInput.addEventListener('keypress', (event) => {
   }
 });
 
-const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+function renderFavorites() {
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-favoritesList.innerHTML = "";
+  favoritesList.innerHTML = "";
 
-favorites.forEach((movie) => {
-  const div = document.createElement('div');
-  div.classList.add('movie-card');
+  favorites.forEach((movie) => {
+    const div = document.createElement('div');
+    div.classList.add('movie-card');
 
-  div.innerHTML = `
-    <h3>${movie.title}</h3>
-    <img src="${
-      movie.poster !== "N/A" ? movie.poster : "https://via.placeholder.com/150"
-    }" alt="Poster">
-  `;
+    div.innerHTML = `
+      <h3>${movie.title}</h3>
+      <img src="${
+        movie.poster !== "N/A" ? movie.poster : "https://via.placeholder.com/150"
+      }" alt="Poster">
+      <button class="delete-btn" data-id="${movie.id}">削除</button>
+    `;
 
-  favoritesList.appendChild(div);
-});
+    favoritesList.appendChild(div);
+
+    div.querySelector('.delete-btn').addEventListener('click', () => {
+      const updatedFavorites = favorites.filter((m) => m.id !== movie.id);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      renderFavorites();
+    });
+  });
+}
+
+renderFavorites();
